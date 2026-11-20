@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Practice Bank</title>
+<meta name="description" content="Practice banking app for learning and testing. Not a real bank.">
+<meta name="theme-color" content="#0a1322">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Practice Bank">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <!-- Practice badge: tap 3x to open tester panel -->
+  <div id="practiceBar" role="button" aria-label="Practice mode. Tap three times for tester settings">
+
+  </div>
+
+  <!-- ============ HOME / ACCOUNTS ============ -->
+  <section class="screen active" id="s-home">
+    <div class="home-top">
+      <button class="icon-btn nofunc" aria-label="Card settings">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="15" height="11" rx="2"/><path d="M3 9h15"/><circle cx="18" cy="17" r="3.2" fill="#0a1322"/><path d="M18 15.6v2.8M16.6 17h2.8"/></svg>
+      </button>
+      <button class="home-search nofunc">What are you looking for?</button>
+      <button class="icon-btn nofunc" aria-label="Chat">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h12v8H9l-3 3v-3H4z"/><path d="M16 9h4v8h-2v2.5L15.5 17H10v-3"/></svg>
+      </button>
+      <button class="icon-btn nofunc" aria-label="Profile">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.2c1.3-2.2 3.2-3.2 5.5-3.2s4.2 1 5.5 3.2"/></svg>
+      </button>
+    </div>
+
+    <div class="home-scroll">
+      <h2 class="h-accounts">Accounts</h2>
+      <div id="accountCards"></div>
+
+      <button class="link-ext nofunc"><span>Link external accounts</span><span class="plus">+</span></button>
+
+      <h3 class="h-send">Send &amp; receive money with <span class="svc-mark"><span class="svc-name"></span><sup>&reg;</sup></span></h3>
+      <div class="tiles">
+        <button class="tile" id="btnSend">
+          <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="#7fb0ff" stroke-width="1.5"><circle cx="15" cy="14" r="8"/><path d="M15 9.5v9M17.4 11.4c-.4-.7-1.2-1.1-2.4-1.1-1.4 0-2.3.7-2.3 1.7 0 2.4 4.9 1.3 4.9 3.9 0 1.1-1 1.8-2.6 1.8-1.2 0-2.1-.5-2.6-1.3"/><path d="M3 12h4M2 15h5M4 18h3"/></svg>
+          <span>Send</span>
+        </button>
+        <button class="tile nofunc">
+          <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="#7fb0ff" stroke-width="1.5"><path d="M6 9a9 9 0 1 1-1.3 8"/><path d="M6 4v5h5"/><path d="M14 9.5v9M16.4 11.4c-.4-.7-1.2-1.1-2.4-1.1-1.4 0-2.3.7-2.3 1.7 0 2.4 4.9 1.3 4.9 3.9 0 1.1-1 1.8-2.6 1.8-1.2 0-2.1-.5-2.6-1.3"/></svg>
+          <span>Request</span>
+        </button>
+        <button class="tile nofunc">
+          <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="#7fb0ff" stroke-width="1.5"><path d="M4 9V4h5M19 4h5v5M24 19v5h-5M9 24H4v-5"/><rect x="8" y="8" width="4" height="4"/><rect x="16" y="8" width="4" height="4"/><rect x="8" y="16" width="4" height="4"/><path d="M16 16h4v4h-4z"/></svg>
+          <span>QR Code</span>
+        </button>
+      </div>
+
+      <div class="spend-card nofunc">
+        <div>
+          <div class="spend-label">Monthly spending</div>
+          <div class="spend-amt" id="spendAmt">$163.16</div>
+          <div class="spend-asof" id="spendAsOf">As of 11/20</div>
+        </div>
+        <div class="spend-pill" id="spendMonth">November</div>
+      </div>
+
+      <div class="tools-band">
+        <h3 class="h-tools">Tools</h3>
+        <div class="tool-card nofunc">
+          <div>
+            <div class="tool-small">Credit score</div>
+            <div class="tool-big">Your credit score has been updated</div>
+          </div>
+          <div class="gauge">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#7fb0ff" stroke-width="1.6"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M12 16l3-5"/></svg>
+          </div>
+        </div>
+        <div class="tool-card nofunc">
+          <div>
+            <div class="tool-small">Budget</div>
+            <div class="tool-big">Set a monthly budget</div>
+          </div>
+          <div class="gauge">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#7fb0ff" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 4"/></svg>
+          </div>
+        </div>
+        <div class="nav-spacer"></div>
+      </div>
+    </div>
+
+    <nav class="tabbar">
+      <button class="tab active nofunc"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7.5 12 4l9 3.5V9H3z"/><rect x="3" y="10" width="18" height="9" rx="1.5"/></svg><span>Accounts</span></button>
+      <button class="tab nofunc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M8 10h7l-2-2M16 14H9l2 2"/></svg><span>Pay &amp; transfer</span></button>
+      <button class="tab nofunc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h9l3 3v15H6z"/><path d="M9 16l2-3 2 2 3-4"/></svg><span>Plan &amp; track</span></button>
+      <button class="tab nofunc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12V4h8l8 8-8 8z"/><circle cx="8.5" cy="8.5" r="1.3"/></svg><span>Offers</span></button>
+      <button class="tab nofunc"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>More</span></button>
+    </nav>
+  </section>
+
+  <!-- ============ SELECT RECIPIENT ============ -->
+  <section class="screen" id="s-recipient">
+    <header class="hdr">
+      <span class="hdr-side"></span>
+      <h1>Select Recipient</h1>
+      <button class="hdr-side right link" data-action="cancel">Cancel</button>
+    </header>
+    <div class="scroll">
+      <div class="rs-search">
+        <button class="rs-search-field" id="openSearch">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9aa6b8" stroke-width="2"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>
+        </button>
+        <button class="rs-add nofunc"><span class="add-circle">+</span>Add</button>
+      </div>
+      <div class="rs-hint">Search your recipients</div>
+      <button class="row qr-row nofunc">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#c9d2df" stroke-width="1.5"><path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5"/><rect x="7" y="7" width="3.5" height="3.5"/><rect x="13.5" y="7" width="3.5" height="3.5"/><rect x="7" y="13.5" width="3.5" height="3.5"/><rect x="13.5" y="13.5" width="3.5" height="3.5"/></svg>
+        <span class="qr-text">Scan QR code to pay with <b class="svc-name"></b><sup>&reg;</sup></span>
+        <span class="chev"></span>
+      </button>
+      <div class="sec-hdr">Recent contacts <span class="chev-up"></span></div>
+      <div id="recentList"></div>
+      <div class="sec-hdr">Registered with <b class="svc-name"></b><sup>&reg;</sup> <span class="chev-up"></span></div>
+      <div id="registeredList"></div>
+      <div style="height:40px"></div>
+    </div>
+  </section>
+
+  <!-- ============ SEARCH RECIPIENTS ============ -->
+  <section class="screen" id="s-search">
+    <header class="hdr search-hdr">
+      <button class="hdr-back" data-action="back" aria-label="Back"><span class="back-chev"></span></button>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#9aa6b8" stroke-width="2"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>
+        <input id="searchInput" type="search" inputmode="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Search your recipients" enterkeyhint="go">
+      </div>
+    </header>
+    <div class="scroll" id="searchResults"></div>
+  </section>
+
+  <!-- ============ ENTER AMOUNT ============ -->
+  <section class="screen" id="s-amount">
+    <header class="hdr">
+      <button class="hdr-back" data-action="back" aria-label="Back"><span class="back-chev"></span></button>
+      <h1>Enter Amount</h1>
+      <button class="hdr-side right link" data-action="cancel">Cancel</button>
+    </header>
+    <div class="scroll amount-scroll">
+      <div class="recip-block left" id="amtRecip"></div>
+      <div class="amt-label">Amount</div>
+      <label class="amt-wrap">
+        <input id="amountInput" type="text" inputmode="decimal" autocomplete="off" aria-label="Amount">
+        <span id="amountDisplay" class="amt-display">$0.00</span>
+      </label>
+      <div class="amt-error" id="amtError" hidden>
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#ff6b6b" stroke-width="2"><path d="M12 3 2 21h20z"/><path d="M12 10v5M12 18v.5"/></svg>
+        <span id="amtErrorText">Please tell us an amount.</span>
+      </div>
+      <div class="amt-limit" id="amtLimit"></div>
+      <button class="learn nofunc">Learn more <span class="chev-sm"></span></button>
+
+      <div class="field">
+        <label for="msgInput">Message to recipient</label>
+        <input id="msgInput" type="text" maxlength="140" placeholder="What's this for?" autocomplete="off" enterkeyhint="done">
+        <div class="counter" id="msgCounter">140 of 140 characters remaining</div>
+      </div>
+
+      <div class="field select-field">
+        <label for="payFrom">Pay from</label>
+        <div class="select-wrap">
+          <select id="payFrom"></select>
+          <span class="chev-down"></span>
+        </div>
+      </div>
+
+      <div class="field date-field nofunc">
+        <label>Send on</label>
+        <div class="date-row"><span class="date-val">Today</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9d2df" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="1.5"/><path d="M4 10h16M8 3v4M16 3v4"/></svg>
+        </div>
+      </div>
+
+      <button class="delivery nofunc">Delivery time and sending limits
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+      </button>
+
+      <div class="repeat-row">
+        <span>Repeat payment</span>
+        <label class="switch"><input type="checkbox" id="repeatToggle"><span class="knob"></span></label>
+      </div>
+      <div style="height:110px"></div>
+    </div>
+    <div class="bottom-bar"><button class="primary" id="btnReview">Review &amp; send</button></div>
+  </section>
+
+  <!-- ============ REVIEW ============ -->
+  <section class="screen" id="s-review">
+    <header class="hdr">
+      <button class="hdr-back" data-action="back" aria-label="Back"><span class="back-chev"></span></button>
+      <h1>Review</h1>
+      <button class="hdr-side right link" data-action="cancel">Cancel</button>
+    </header>
+    <div class="scroll">
+      <div class="review-top">
+        <div class="recip-block center" id="revRecip"></div>
+        <div class="amt-label">Amount</div>
+        <div class="rev-amt" id="revAmt">$0.00</div>
+      </div>
+      <div class="rev-rows">
+        <div class="rev-row"><span>Sending as</span><span id="revAs"></span></div>
+        <div class="rev-row"><span>Pay from</span><span id="revFrom"></span></div>
+        <div class="rev-row"><span>Send on</span><span id="revDate"></span></div>
+        <div class="rev-row"><span>Message to recipient</span><span id="revMsg"></span></div>
+        <div class="rev-row" id="revRepeatRow" hidden><span>Repeat</span><span>Monthly</span></div>
+      </div>
+      <div style="height:200px"></div>
+    </div>
+    <div class="bottom-bar">
+      <p class="disclaimer">Only send money to people and businesses you know and trust. Payments you authorize may not be protected, so you might not be able to get your money back once it's sent.</p>
+      <button class="primary" id="btnSendNow"><span class="btn-label">Send it now</span><span class="spinner" hidden></span></button>
+    </div>
+  </section>
+
+  <!-- ============ CONFIRMATION ============ -->
+  <section class="screen" id="s-confirm">
+    <header class="hdr"><span class="hdr-side"></span><h1>Confirmation</h1><span class="hdr-side"></span></header>
+    <div class="confirm-body">
+      <div class="big-check" id="bigCheck"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/><path d="M14 27l8 8 16-17"/></svg></div>
+      <div class="confirm-content" id="confirmContent">
+        <div class="small-check"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/><path d="M14 27l8 8 16-17"/></svg></div>
+        <p class="conf-title" id="confTitle"></p>
+        <div class="conf-amt" id="confAmt"></div>
+        <div class="recip-block center small" id="confRecip"></div>
+      </div>
+    </div>
+    <div class="bottom-bar"><button class="primary" id="btnDone">Done</button></div>
+  </section>
+
+  <!-- Fake notification banner -->
+  <div id="notif" class="notif" hidden>
+    <div class="notif-icon"><img src="icons/icon-192.png" alt=""></div>
+    <div class="notif-text">
+      <div class="notif-top"><b id="notifApp">Practice Bank</b><span>now</span></div>
+      <div id="notifMsg"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- Tester panel -->
+  <div id="tester" class="tester" hidden>
+    <div class="tester-card">
+      <h2>Tester settings</h2>
+      <p class="tester-note">Changes are saved on this device only. Nothing is real.</p>
+      <label>Your name (Sending as)<input id="tName"></label>
+      <label>Checking balance<input id="tChk" inputmode="decimal"></label>
+      <label>Savings balance<input id="tSav" inputmode="decimal"></label>
+      <label>Monthly spending<input id="tSpend" inputmode="decimal"></label>
+      <label>Recipient daily limit<input id="tLimit" inputmode="decimal"></label>
+      <label class="chk"><input type="checkbox" id="tDeduct"> Subtract sent money from balance</label>
+      <label class="chk"><input type="checkbox" id="tNotif"> Show notification after sending</label>
+      <div class="tester-btns">
+        <button id="tReset" class="ghost">Reset</button>
+        <button id="tSave" class="primary">Save</button>
+      </div>
+      <button id="tClose" class="tester-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
